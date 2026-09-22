@@ -65,10 +65,10 @@ site that calls the API URL in `frontend/config.js`.
 
 1. Push this repository to GitHub.
 2. In Render, choose **New → Blueprint**, connect the repository, and deploy
-   `render.yaml`. It creates a Docker web service with a persistent disk for the
-   SQLite database. After deployment, copy the public `https://…onrender.com`
-   API URL. Set `QR_CORS_ORIGINS` in the Render service after the Vercel URL is
-   known (see step 4).
+   `render.yaml`. It creates a free Docker web service for demonstrations.
+   After deployment, copy the public `https://…onrender.com` API URL. Set
+   `QR_CORS_ORIGINS` in the Render service after the Vercel URL is known (see
+   step 4). Its SQLite data resets whenever the free service restarts or sleeps.
 3. Replace the local value in `frontend/config.js` with the Render API URL and
    push the change. Do not include a trailing slash.
 4. In Vercel, import the same GitHub repository. Set the **Root Directory** to

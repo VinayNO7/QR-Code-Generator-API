@@ -2,7 +2,9 @@ services:
   - type: web
     name: qr-code-generator-api
     runtime: docker
-    plan: starter
+    # Free services are suitable for a short-lived demo. Their filesystem is
+    # ephemeral, so the SQLite database is reset when Render restarts/sleeps.
+    plan: free
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /health
@@ -12,10 +14,6 @@ services:
       - key: QR_API_SECRET
         generateValue: true
       - key: QR_DATABASE_PATH
-        value: /data/qr_api.db
+        value: /tmp/qr_api.db
       - key: QR_TOKEN_TTL_MINUTES
         value: "1440"
-    disk:
-      name: qr-code-data
-      mountPath: /data
-      sizeGB: 1
