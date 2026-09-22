@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: qr-code-generator-api
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: QR_API_SECRET
+        generateValue: true
+      - key: QR_DATABASE_PATH
+        value: /data/qr_api.db
+      - key: QR_TOKEN_TTL_MINUTES
+        value: "1440"
+    disk:
+      name: qr-code-data
+      mountPath: /data
+      sizeGB: 1

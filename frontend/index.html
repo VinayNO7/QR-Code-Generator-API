@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Create custom QR codes and keep them in your personal history." />
+    <title>QuickQR — Create QR codes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="QuickQR home"><span>Q</span> QuickQR</a>
+        <div class="connection"><i></i><span id="api-label">Connecting to API…</span></div>
+        <button class="text-button hidden" id="logout-button" type="button">Sign out</button>
+      </header>
+
+      <section class="hero" id="top">
+        <div>
+          <p class="eyebrow">CUSTOM QR CODE STUDIO</p>
+          <h1>Make every link<br /><em>scannable.</em></h1>
+          <p class="intro">Create crisp, personalized QR codes, download them instantly, and keep your collection in one place.</p>
+        </div>
+        <div class="hero-orb" aria-hidden="true"><span></span><span></span><span></span></div>
+      </section>
+
+      <section class="auth-panel card" id="auth-panel">
+        <div class="auth-copy">
+          <p class="eyebrow">YOUR WORKSPACE</p>
+          <h2>Save your QR history</h2>
+          <p>Sign in to generate, download, and revisit your own codes.</p>
+        </div>
+        <form id="auth-form" novalidate>
+          <label>Email<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <label>Password<input id="password" type="password" autocomplete="current-password" minlength="10" placeholder="At least 10 characters" required /></label>
+          <div class="auth-actions">
+            <button class="button secondary" id="register-button" type="button">Create account</button>
+            <button class="button" id="login-button" type="submit">Sign in <span>→</span></button>
+          </div>
+        </form>
+      </section>
+
+      <section class="studio hidden" id="studio">
+        <div class="section-heading"><div><p class="eyebrow">NEW CREATION</p><h2>Design your QR code</h2></div><p class="signed-in">Signed in as <strong id="user-email"></strong></p></div>
+        <div class="workspace card">
+          <form class="qr-form" id="qr-form">
+            <label class="wide">Destination URL<input id="url" type="url" placeholder="https://example.com" required /></label>
+            <div class="control-grid">
+              <label>Foreground <span class="color-input"><input id="foreground" type="color" value="#121525" /><code id="foreground-text">#121525</code></span></label>
+              <label>Background <span class="color-input"><input id="background" type="color" value="#FFFFFF" /><code id="background-text">#FFFFFF</code></span></label>
+              <label>Module size <select id="size"><option value="6">Compact</option><option value="10" selected>Standard</option><option value="16">Large</option><option value="24">XL</option></select></label>
+              <label>Error correction <select id="correction"><option value="L">Low</option><option value="M" selected>Medium</option><option value="Q">Quartile</option><option value="H">High</option></select></label>
+            </div>
+            <label>Quiet-zone border <input id="border" type="range" min="0" max="10" value="4" /><output id="border-value">4 modules</output></label>
+            <button class="button create" type="submit">Generate QR code <span>↗</span></button>
+          </form>
+          <div class="preview"><p class="eyebrow">LIVE PREVIEW</p><div class="qr-stage"><div class="placeholder" id="preview-placeholder">Your QR<br />appears here</div><img class="hidden" id="preview-image" alt="Generated QR code preview" /></div><p id="preview-caption">Add a link and generate your first code.</p></div>
+        </div>
+      </section>
+
+      <section class="history hidden" id="history">
+        <div class="section-heading"><div><p class="eyebrow">YOUR LIBRARY</p><h2>Recent codes</h2></div><button class="text-button" id="refresh-button" type="button">Refresh</button></div>
+        <div class="empty-state card" id="empty-history"><span>⌘</span><h3>No QR codes yet</h3><p>Your generated QR codes will live here.</p></div>
+        <div class="history-grid" id="history-grid"></div>
+      </section>
+    </main>
+    <div class="toast hidden" id="toast" role="status"></div>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
